@@ -4,6 +4,7 @@ import { makeStyles } from '@material-ui/core/styles';
 import { useLocation, useHistory } from "react-router-dom";
 
 import QuestionBox from '../components/QuestionBox';
+import ProgressBar from '../components/ProgressBar';
 
 const useStyles = makeStyles((theme) => ({
     paper: {
@@ -97,6 +98,7 @@ const LanguageTest = () => {
                 isLastQuestion={questionCounter === testWordBank.length - 1 ? true: false}
                 totalQuestions={testWordBank.length}
             />
+            <ProgressBar percentage={Math.round(100*(questionCounter + 1)/testWordBank.length)} />
         </Grid>
     );
 };
