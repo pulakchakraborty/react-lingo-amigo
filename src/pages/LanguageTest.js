@@ -1,7 +1,8 @@
-import React, { useState } from 'react';
+import React, { useState, useEffect } from 'react';
 import { Grid, Typography } from '@material-ui/core';
 import { makeStyles } from '@material-ui/core/styles';
-import { useLocation } from "react-router-dom";
+import { useLocation, useHistory } from "react-router-dom";
+
 import QuestionBox from '../components/QuestionBox';
 
 const useStyles = makeStyles((theme) => ({
@@ -25,11 +26,13 @@ const useStyles = makeStyles((theme) => ({
 const LanguageTest = () => {
     const classes = useStyles();
     const location = useLocation();
+    const history = useHistory();
     const testWordBank = [...location.state.selectedWordBank];
 
+    /* States for LanguageTest component */
+    const [ resultData, setResultData ] = useState({quizResponse: [], score: 0 });
     const [ questionCounter, setQuestionCounter ] = useState(0);
-
-    const [ resultData, setResultData ] = useState({quizResponse: [], score: 0});
+    const [ lastQuestionFlag , setLastQuestionFlag] = useState(false);
 
     const handleAnswer = (userAnswer) => {
         let isHit = false;
@@ -52,23 +55,33 @@ const LanguageTest = () => {
             score: score
         });
 
+        console.log(`inside handle answer after setResultData: ${resultData}`);
         if (questionCounter < testWordBank.length -1 ) {
-            console.log(`answer is: ${userAnswer}`);
-            setNextQuestionCounter();
+            setTimeout(() => setNextQuestionCounter(), 200);
         } else {
-            setResult();
+            setTimeout(() => setLastQuestionFlag(true), 200);
         }
     };
 
     const setNextQuestionCounter = () => {
-        const counter = questionCounter + 1;
-        setQuestionCounter(counter);
+        setQuestionCounter(questionCounter => questionCounter + 1);
     };
 
-    const setResult = () => {
-        console.log(`Final result: ${resultData.score}`);
-    };
-    console.log(resultData);
+    /* This hook is used to watch the lastQuestionFlag,
+        calculate final score % of the user and redirect user
+        to the test-result page with the testResultData and score %
+    */
+    useEffect(() => {
+        if (lastQuestionFlag) {
+            const setResult = () => {
+                let a = resultData.score;
+                let b = testWordBank.length;
+                const scorePercentage = Math.round(100*a/b);
+                history.push('/test-result', { testResultData: [...resultData.quizResponse], testScore: scorePercentage });
+            };
+            setResult();
+        }
+    }, [lastQuestionFlag]);
 
     return(
         <Grid container spacing={3} justify={"center"}>
