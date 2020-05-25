@@ -56,7 +56,7 @@ const LanguageTest = () => {
             console.log(`answer is: ${userAnswer}`);
             setNextQuestionCounter();
         } else {
-            setResult(userAnswer);
+            setResult();
         }
     };
 
@@ -65,7 +65,7 @@ const LanguageTest = () => {
         setQuestionCounter(counter);
     };
 
-    const setResult = (userAnswer) => {
+    const setResult = () => {
         console.log(`Final result: ${resultData.score}`);
     };
     console.log(resultData);
@@ -80,8 +80,10 @@ const LanguageTest = () => {
             <QuestionBox
                 questionId={questionCounter + 1}
                 question={testWordBank[questionCounter].english}
-                answer={testWordBank[questionCounter].german}
-                handleAnswer={handleAnswer} />
+                handleAnswer={handleAnswer}
+                isLastQuestion={questionCounter === testWordBank.length - 1 ? true: false}
+                totalQuestions={testWordBank.length}
+            />
         </Grid>
     );
 };

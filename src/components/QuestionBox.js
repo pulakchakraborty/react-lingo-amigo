@@ -25,7 +25,7 @@ const useStyles = makeStyles((theme) => ({
     }
 }));
 
-const QuestionBox = ({ question, answer, questionId, handleAnswer }) => {
+const QuestionBox = ({ question, questionId, handleAnswer, isLastQuestion, totalQuestions }) => {
     const classes = useStyles();
     const [ givenAnswer, setGivenAnswer ] = useState('');
 
@@ -38,10 +38,13 @@ const QuestionBox = ({ question, answer, questionId, handleAnswer }) => {
     }
 
     return(
-        <Grid item sm={6} md={6} xs={12}>
+        <Grid item sm={9} md={6} xs={12}>
             <Paper className={classes.paper}>
                 <Typography variant="h4" color={'primary'} className={classes.questionTitle} >
-                    Word {questionId}: {question} : {answer}
+                    Word {questionId} of {totalQuestions}
+                </Typography>
+                <Typography variant="h3" color={'secondary'} className={classes.questionTitle} >
+                    {question}
                 </Typography>
                 <form className={classes.root} noValidate autoComplete="off">
                     <TextField
@@ -53,8 +56,8 @@ const QuestionBox = ({ question, answer, questionId, handleAnswer }) => {
                         onChange={e => {setGivenAnswer(e.target.value)}}
                     />
                 </form>
-                <Button className={classes.buttonContainer} onClick={handleSubmit} variant="contained" color="primary">
-                    Next Question
+                <Button onClick={handleSubmit} className={classes.buttonContainer} variant="contained" color="primary">
+                        {isLastQuestion ? 'Almost Done' : 'Next Question'}
                 </Button>
             </Paper>
         </Grid>
