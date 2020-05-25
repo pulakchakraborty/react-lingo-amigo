@@ -13,7 +13,7 @@ const useStyles = makeStyles((theme) => ({
         padding: theme.spacing(2),
         textAlign: 'center',
         color: theme.palette.text.secondary,
-        margin: '10px',
+        margin: theme.spacing(1),
     },
     buttonContainer: {
         margin: theme.spacing(2),
@@ -37,7 +37,7 @@ const FormInput = ({ growWordBank }) => {
 
     return(
         <Grid container spacing={3} justify={"center"}>
-            <Grid item sm={12} md={6} xs={12}>
+            <Grid item sm={9} md={6} xs={12}>
                 <Paper className={classes.paper}>
                     <form className={classes.root} noValidate autoComplete="off" onSubmit={handleSubmit}>
                         <TextField

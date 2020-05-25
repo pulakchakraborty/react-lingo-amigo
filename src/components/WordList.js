@@ -9,18 +9,15 @@ import { makeStyles } from '@material-ui/core/styles';
 
 
 const useStyles = makeStyles((theme) => ({
-    root: {
-      flexGrow: 1,
-    },
     paper: {
         padding: theme.spacing(2),
         textAlign: 'center',
         color: theme.palette.text.secondary,
-        margin: '10px',
+        margin: theme.spacing(1),
     },
-    demo: {
+    wordlistContainer: {
         backgroundColor: theme.palette.background.paper,
-        height: 400,
+        height: 300,
         overflowY: 'scroll',
     },
     title: {
@@ -29,18 +26,20 @@ const useStyles = makeStyles((theme) => ({
     },
 }));
 
-const WordList = ({ wordBank }) => {
+const WordList = ({ wordBank, deleteWord }) => {
     const classes = useStyles();
 
     const renderList = wordBank.map((data, index) => {
         return(
             <ListItem key={index}>
-                <ListItemText
-                    primary={data.english}
-                    secondary={data.german}
+                <ListItemText style={{ width: '40%' }}
+                    primary={<Typography variant="h6">{data.english}</Typography>}
+                />
+                <ListItemText style={{ width: '40%' }}
+                    primary={<Typography variant="h6">{data.german}</Typography>}
                 />
                 <ListItemSecondaryAction>
-                    <IconButton edge="end" aria-label="delete">
+                    <IconButton edge="end" aria-label="delete" onClick={() => deleteWord(index)}>
                         <DeleteIcon />
                     </IconButton>
                 </ListItemSecondaryAction>
@@ -50,12 +49,12 @@ const WordList = ({ wordBank }) => {
 
     return(
         <Grid container spacing={3} justify={"center"}>
-            <Grid item xs={12} sm={12} md={6} >
+            <Grid item xs={12} sm={9} md={6} >
                 <Paper className={classes.paper}>
                     <Typography variant="h6" color={'primary'} className={classes.title} >
                         Word List
                     </Typography>
-                    <div className={classes.demo}>
+                    <div className={classes.wordlistContainer}>
                         <List>
                         {wordBank.length > 0 && renderList}
                         {/*generate(
