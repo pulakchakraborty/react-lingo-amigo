@@ -1,5 +1,5 @@
 import React from 'react';
-import { Paper, Typography, Grid, ListItemText, } from '@material-ui/core';
+import { Paper, Typography, Grid, ListItemText, Divider } from '@material-ui/core';
 import List from '@material-ui/core/List';
 import ListItem from '@material-ui/core/ListItem';
 import ListItemSecondaryAction from '@material-ui/core/ListItemSecondaryAction';
@@ -31,19 +31,22 @@ const WordList = ({ wordBank, deleteWord }) => {
 
     const renderList = wordBank.map((data, index) => {
         return(
-            <ListItem key={index}>
-                <ListItemText style={{ width: '40%' }}
-                    primary={<Typography variant="h6">{data.english}</Typography>}
-                />
-                <ListItemText style={{ width: '40%' }}
-                    primary={<Typography variant="h6">{data.german}</Typography>}
-                />
-                <ListItemSecondaryAction>
-                    <IconButton edge="end" aria-label="delete" onClick={() => deleteWord(index)}>
-                        <DeleteIcon />
-                    </IconButton>
-                </ListItemSecondaryAction>
-            </ListItem>
+            <>
+                <ListItem key={index}>
+                    <ListItemText style={{ width: '40%' }}
+                        primary={<Typography variant="h6">{data.english}</Typography>}
+                    />
+                    <ListItemText style={{ width: '40%' }}
+                        primary={<Typography variant="h6">{data.german}</Typography>}
+                    />
+                    <ListItemSecondaryAction>
+                        <IconButton edge="end" aria-label="delete" onClick={() => deleteWord(index)}>
+                            <DeleteIcon />
+                        </IconButton>
+                    </ListItemSecondaryAction>
+                </ListItem>
+                <Divider component="li" />
+            </>
         );
     });
 
@@ -56,20 +59,7 @@ const WordList = ({ wordBank, deleteWord }) => {
                     </Typography>
                     <div className={classes.wordlistContainer}>
                         <List>
-                        {wordBank.length > 0 && renderList}
-                        {/*generate(
-                            <ListItem>
-                            <ListItemText
-                                primary="Single-line item"
-                                secondary="secondary line"
-                            />
-                            <ListItemSecondaryAction>
-                                <IconButton edge="end" aria-label="delete">
-                                <DeleteIcon />
-                                </IconButton>
-                            </ListItemSecondaryAction>
-                            </ListItem>,
-                        )*/}
+                        {renderList}
                         </List>
                     </div>
                 </Paper>
