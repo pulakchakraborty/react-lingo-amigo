@@ -32,7 +32,10 @@ const FormInput = ({ growWordBank }) => {
         if (event) {
             event.preventDefault();
         }
-        growWordBank(wordPair);
+        // Reset the text input field after each addition to wordbook
+        const tempWordPair = {...wordPair};
+        setWordPair({...wordPair, english: '', german: ''});
+        growWordBank(tempWordPair);
     }
 
     return(

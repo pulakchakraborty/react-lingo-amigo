@@ -34,7 +34,10 @@ const QuestionBox = ({ question, questionId, handleAnswer, isLastQuestion, total
             event.preventDefault();
         }
         console.log(`given answer: ${givenAnswer}`);
-        handleAnswer(givenAnswer);
+        // Reset the text input field after each answered question
+        const userAnswer = givenAnswer;
+        setGivenAnswer('')
+        handleAnswer(userAnswer);
     }
 
     return(
