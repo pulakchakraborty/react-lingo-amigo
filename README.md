@@ -1,10 +1,28 @@
+## LingoAmigo
+
+Just another web app to add words in a wordbook and taking a quiz to test the newly learnt words. Live demo is available [here](https://lingo-amigo.now.sh/dashboard)
+
+### Dashboard Page
+
+![Dashboard](https://github.com/pulakchakraborty/react-lingo-amigo/blob/master/public/dashboard.png)
+
+### Quiz Page
+![Test](https://github.com/pulakchakraborty/react-lingo-amigo/blob/master/public/test.png)
+
+### Quiz Result Page
+![Result](https://github.com/pulakchakraborty/react-lingo-amigo/blob/master/public/result.png)
+
 This project was bootstrapped with [Create React App](https://github.com/facebook/create-react-app).
+
+## Local Set-up
+
+Download or clone the project in your machine
 
 ## Available Scripts
 
 In the project directory, you can run:
 
-### `yarn start`
+### `yarn start` or `npm start`
 
 Runs the app in the development mode.<br />
 Open [http://localhost:3000](http://localhost:3000) to view it in the browser.
@@ -12,12 +30,12 @@ Open [http://localhost:3000](http://localhost:3000) to view it in the browser.
 The page will reload if you make edits.<br />
 You will also see any lint errors in the console.
 
-### `yarn test`
+### `yarn test` or `npm test`
 
 Launches the test runner in the interactive watch mode.<br />
 See the section about [running tests](https://facebook.github.io/create-react-app/docs/running-tests) for more information.
 
-### `yarn build`
+### `yarn build` or `npm build`
 
 Builds the app for production to the `build` folder.<br />
 It correctly bundles React in production mode and optimizes the build for the best performance.
