@@ -1,7 +1,7 @@
 import React, { Fragment } from 'react';
 import Fab from '@material-ui/core/Fab';
 import EditIcon from '@material-ui/icons/Edit';
-import { Container } from '@material-ui/core';
+import { Container, Grid, Typography } from '@material-ui/core';
 import { makeStyles } from '@material-ui/core/styles';
 
 import FormInput from '../components/FormInput';
@@ -30,18 +30,26 @@ const Dashboard = ({ wordBank, growWordBank, deleteWord, onStartTest }) => {
 
     return(
         <Fragment>
-             <FormInput growWordBank={growWordBank} />
-             <WordList wordBank={wordBank} deleteWord={deleteWord} />
-             <Container className={classes.fabContainer} xs={12} sm={9} md={6}>
-                <Fab variant="extended"
-                    size="medium"
-                    color="secondary"
-                    aria-label="edit"
-                    onClick={onStartTest}
-                >
-                    <EditIcon />
-                    Take a Test
-                </Fab>
+            <Grid item sm={12} md={12} xs={12}>
+                <Typography variant="h4" color={'secondary'} className={classes.brandName} >
+                    L i n g o A m i g o
+                </Typography>
+                <Typography variant="h5" color={'primary'} className={classes.welcomeText} >
+                    Scale up your vocabulary faster and smarter with our app
+                </Typography>
+            </Grid>
+            <FormInput growWordBank={growWordBank} />
+            <WordList wordBank={wordBank} deleteWord={deleteWord} />
+            <Container className={classes.fabContainer} xs={12} sm={9} md={6}>
+            <Fab variant="extended"
+                size="medium"
+                color="secondary"
+                aria-label="edit"
+                onClick={onStartTest}
+            >
+                <EditIcon />
+                Take a Test
+            </Fab>
             </Container>
          </Fragment>
     );
