@@ -50,7 +50,6 @@ const QuestionBox = ({ question, questionId, handleAnswer, isLastQuestion, total
                     onError={e => console.log(e)}
                 >
                     <TextValidator
-                        className="outlinedBasic"
                         label="type your answer"
                         name="english"
                         variant="outlined"

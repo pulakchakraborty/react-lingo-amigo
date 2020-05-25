@@ -40,17 +40,17 @@ const Dashboard = ({ wordBank, growWordBank, deleteWord, onStartTest }) => {
             </Grid>
             <FormInput growWordBank={growWordBank} />
             <WordList wordBank={wordBank} deleteWord={deleteWord} />
-            <Container className={classes.fabContainer} xs={12} sm={9} md={6}>
-            <Fab variant="extended"
-                size="medium"
-                color="secondary"
-                aria-label="edit"
-                onClick={onStartTest}
-            >
-                <EditIcon />
-                Take a Test
-            </Fab>
-            </Container>
+            <Grid className={classes.fabContainer} item xs={12} sm={12} md={12}>
+                <Fab variant="extended"
+                    size="medium"
+                    color="secondary"
+                    aria-label="edit"
+                    onClick={onStartTest}
+                >
+                    <EditIcon />
+                    Take a Test
+                </Fab>
+            </Grid>
          </Fragment>
     );
 };
