@@ -1,6 +1,7 @@
-import React, { useState } from 'react';
+import React, { useState, createRef } from 'react';
 import { makeStyles } from '@material-ui/core/styles';
-import { Grid, Paper, TextField, Button } from '@material-ui/core';
+import { Grid, Paper, Button } from '@material-ui/core';
+import { ValidatorForm, TextValidator} from 'react-material-ui-form-validator';
 
 const useStyles = makeStyles((theme) => ({
     root: {
@@ -22,6 +23,7 @@ const useStyles = makeStyles((theme) => ({
 
 const FormInput = ({ growWordBank }) => {
     const classes = useStyles();
+    const formRef = createRef();
 
     const [ wordPair, setWordPair ] = useState({
         english: '',
@@ -42,33 +44,46 @@ const FormInput = ({ growWordBank }) => {
         <Grid container spacing={3} justify={"center"}>
             <Grid item sm={9} md={6} xs={12}>
                 <Paper className={classes.paper}>
-                    <form className={classes.root} noValidate autoComplete="off" onSubmit={handleSubmit}>
-                        <TextField
-                            className="outlined-basic"
-                            label="English Word"
-                            variant="outlined"
-                            value={wordPair.english}
-                            onChange={e => {
-                                setWordPair({
-                                ...wordPair,
-                                english: e.target.value
-                                })}}
-                        />
-                        <TextField
-                            className="outlined-basic"
-                            label="English Word"
-                            variant="outlined"
-                            value={wordPair.german}
-                            onChange={e => {
-                                setWordPair({
-                                ...wordPair,
-                                german: e.target.value
-                                })}}
-                        />
-                        <Button type="submit" variant="contained" color="primary" className={classes.buttonContainer}>
-                            Add to Word List
-                        </Button>
-                    </form>
+                    <ValidatorForm
+                            className={classes.root}
+                            ref={formRef}
+                            onSubmit={handleSubmit}
+                            onError={e => console.log(e)}
+                        >
+                            <TextValidator
+                                className="outlined-basic"
+                                label="English Word"
+                                name="english"
+                                variant="outlined"
+                                value={wordPair.english}
+                                onChange={e => {
+                                    setWordPair({
+                                    ...wordPair,
+                                    english: e.target.value
+                                    })
+                                }}
+                                validators={['required', 'matchRegexp:^[A-Za-zäöüÄÖÜ]+$']}
+                                errorMessages={['this field is required', 'type a word, not a password']}
+                            />
+                            <TextValidator
+                                className="outlined-basic"
+                                label="German Word"
+                                name="german"
+                                variant="outlined"
+                                value={wordPair.german}
+                                onChange={e => {
+                                    setWordPair({
+                                    ...wordPair,
+                                    german: e.target.value
+                                    })
+                                }}
+                                validators={['required', 'matchRegexp:^[A-Za-zäöüÄÖÜ]+$']}
+                                errorMessages={['this field is required', 'type a word, not a password']}
+                            />
+                            <Button type="submit" variant="contained" color="primary" className={classes.buttonContainer}>
+                                Add to Word List
+                            </Button>
+                        </ValidatorForm>
                 </Paper>
             </Grid>
         </Grid>
