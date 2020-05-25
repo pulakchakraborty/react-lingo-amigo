@@ -1,15 +1,9 @@
-import React, { useState } from 'react';
+import React, { useState, createRef } from 'react';
 import { Grid, Paper, Typography, TextField, Button } from '@material-ui/core';
 import { makeStyles } from '@material-ui/core/styles';
+import { ValidatorForm, TextValidator} from 'react-material-ui-form-validator';
 
 const useStyles = makeStyles((theme) => ({
-    root: {
-        '& > *': {
-          margin: theme.spacing(1),
-          width: '25ch',
-          textAlign: 'center',
-        },
-    },
     paper: {
         padding: theme.spacing(2),
         textAlign: 'center',
@@ -22,11 +16,12 @@ const useStyles = makeStyles((theme) => ({
     },
     buttonContainer: {
         margin: theme.spacing(2),
-    }
+    },
 }));
 
 const QuestionBox = ({ question, questionId, handleAnswer, isLastQuestion, totalQuestions }) => {
     const classes = useStyles();
+    const formRef = createRef();
     const [ givenAnswer, setGivenAnswer ] = useState('');
 
     const handleSubmit = (event) => {
@@ -49,19 +44,26 @@ const QuestionBox = ({ question, questionId, handleAnswer, isLastQuestion, total
                 <Typography variant="h3" color={'secondary'} className={classes.questionTitle} >
                     {question}
                 </Typography>
-                <form className={classes.root} noValidate autoComplete="off">
-                    <TextField
-                        className="outlined-basic"
+                <ValidatorForm
+                    ref={formRef}
+                    onSubmit={handleSubmit}
+                    onError={e => console.log(e)}
+                >
+                    <TextValidator
+                        className="outlinedBasic"
                         label="type your answer"
+                        name="english"
                         variant="outlined"
                         fullWidth
                         value={givenAnswer}
                         onChange={e => {setGivenAnswer(e.target.value)}}
+                        validators={['required', 'matchRegexp:^[A-Za-zäöüÄÖÜ]+$']}
+                        errorMessages={['this field is required', 'is it a word or a password?']}
                     />
-                </form>
-                <Button onClick={handleSubmit} className={classes.buttonContainer} variant="contained" color="primary">
+                    <Button type="submit" className={classes.buttonContainer} variant="contained" color="primary">
                         {isLastQuestion ? 'Almost Done' : 'Next Question'}
-                </Button>
+                    </Button>
+                </ValidatorForm>
             </Paper>
         </Grid>
     );
