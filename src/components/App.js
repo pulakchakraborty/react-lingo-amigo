@@ -6,6 +6,7 @@ import Header from './Header';
 import Dashboard from '../pages/Dashboard';
 import LanguageTest from '../pages/LanguageTest';
 import TestResult from '../pages/TestResult';
+import { initialData } from '../assets/initialData';
 
 const useStyles = makeStyles((theme) => ({
     appContainer: {
@@ -19,9 +20,10 @@ const useStyles = makeStyles((theme) => ({
 }));
 
 const App = () => {
+    console.log(`initial app data: ${initialData}`);
     const classes = useStyles();
     const history = useHistory();
-    const [ wordBank, setWordBank ] = useState([]);
+    const [ wordBank, setWordBank ] = useState([...initialData]);
 
     /* This function adds a new pair of words in the word-list */
     const growWordBank = ({ english, german }) => {
