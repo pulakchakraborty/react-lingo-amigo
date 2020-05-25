@@ -1,6 +1,9 @@
 import React, { useState } from 'react';
 import { Route, Switch, Redirect, useHistory } from 'react-router-dom';
 import { makeStyles } from '@material-ui/core/styles';
+import Snackbar from '@material-ui/core/Snackbar';
+import Alert from '@material-ui/lab/Alert';
+
 
 import Header from './Header';
 import Dashboard from '../pages/Dashboard';
@@ -23,7 +26,10 @@ const App = () => {
     console.log(`initial app data: ${initialData}`);
     const classes = useStyles();
     const history = useHistory();
+
+    /* States for App component */
     const [ wordBank, setWordBank ] = useState([...initialData]);
+    const [openSnackbar, setOpenSnackbar] = useState(false);
 
     /* This function adds a new pair of words in the word-list */
     const growWordBank = ({ english, german }) => {
@@ -49,7 +55,13 @@ const App = () => {
                 .sort(() => 0.5 - Math.random())
                 .slice(0, 20);      // change the hardcoded value in future
             history.push('/language-test', { selectedWordBank: [...shuffledWordBank] });
+        } else {
+            setOpenSnackbar(true);
         }
+    };
+
+    const handleSnackbarClose = () => {
+        setOpenSnackbar(false);
     };
 
     return(
@@ -72,6 +84,15 @@ const App = () => {
                 <Route exact path="/language-test" component={LanguageTest} />
                 <Route exact path="/test-result" component={TestResult} />
             </Switch>
+            <Snackbar
+                open={openSnackbar}
+                autoHideDuration={1000}
+                onClose={handleSnackbarClose}
+            >
+                <Alert onClose={handleSnackbarClose} severity="info">
+                Add {20 - wordBank.length} more {wordBank.length < 19 ? 'words' : 'word'}! Make sure you have at least 20 words in the wordbook!
+                </Alert>
+            </Snackbar>
         </div>
     );
 };

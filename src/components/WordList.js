@@ -55,7 +55,7 @@ const WordList = ({ wordBank, deleteWord }) => {
             <Grid item xs={12} sm={9} md={6} >
                 <Paper className={classes.paper}>
                     <Typography variant="h5" color={'primary'} className={classes.title} >
-                        Your Wordbook
+                        Your Wordbook ({wordBank.length} words)
                     </Typography>
                     <div className={classes.wordlistContainer}>
                         <List>
