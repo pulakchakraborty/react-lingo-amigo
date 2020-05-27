@@ -1,6 +1,7 @@
-import React, { useState } from 'react';
+import React, { useState, Fragment } from 'react';
 import { Route, Switch, Redirect, useHistory } from 'react-router-dom';
-import { makeStyles } from '@material-ui/core/styles';
+import { Paper } from '@material-ui/core';
+import { makeStyles, ThemeProvider, createMuiTheme } from '@material-ui/core/styles';
 import Snackbar from '@material-ui/core/Snackbar';
 import Alert from '@material-ui/lab/Alert';
 
@@ -18,7 +19,6 @@ const useStyles = makeStyles((theme) => ({
         height: '100%',
         position: 'sticky',
         overflowY: 'scroll',
-        backgroundColor: 'rgba(240, 240, 240, 1)',
     },
 }));
 
@@ -29,7 +29,17 @@ const App = () => {
 
     /* States for App component */
     const [ wordBank, setWordBank ] = useState([...initialData]);
-    const [openSnackbar, setOpenSnackbar] = useState(false);
+    const [ openSnackbar, setOpenSnackbar ] = useState(false);
+    const [ darkMode, setDarkMode ] = useState(false);
+
+    const theme = createMuiTheme({
+        palette: {
+            type: darkMode ? "dark" : "light"
+        },
+    });
+
+    /* This function toggles the theme between light mode and dark mode */
+    const switchTheme = () => setDarkMode(darkMode => !darkMode);
 
     /* This function adds a new pair of words in the word-list */
     const growWordBank = ({ english, german }) => {
@@ -65,35 +75,40 @@ const App = () => {
     };
 
     return(
-        <div className={classes.appContainer}>
-            <Header />
-            <Switch>
-                <Route exact path="/dashboard"
-                        render={(props) =>
-                            <Dashboard {...props}
-                                wordBank={wordBank}
-                                growWordBank={growWordBank}
-                                deleteWord={deleteWord}
-                                onStartTest={onStartTest}
-                            />
-                        }
-                />
-                <Route exact path="/">
-                    <Redirect to="/dashboard" />
-                </Route>
-                <Route exact path="/language-test" component={LanguageTest} />
-                <Route exact path="/test-result" component={TestResult} />
-            </Switch>
-            <Snackbar
-                open={openSnackbar}
-                autoHideDuration={1000}
-                onClose={handleSnackbarClose}
-            >
-                <Alert onClose={handleSnackbarClose} severity="info">
-                Add {20 - wordBank.length} more {wordBank.length < 19 ? 'words' : 'word'}! Make sure you have at least 20 words in the wordbook!
-                </Alert>
-            </Snackbar>
-        </div>
+
+        <Fragment>
+            <ThemeProvider theme={theme}>
+                <Paper className={classes.appContainer}>
+                    <Header   onSwitchTheme={switchTheme} />
+                    <Switch>
+                        <Route exact path="/dashboard"
+                                render={(props) =>
+                                    <Dashboard {...props}
+                                        wordBank={wordBank}
+                                        growWordBank={growWordBank}
+                                        deleteWord={deleteWord}
+                                        onStartTest={onStartTest}
+                                    />
+                                }
+                        />
+                        <Route exact path="/">
+                            <Redirect to="/dashboard" />
+                        </Route>
+                        <Route exact path="/language-test" component={LanguageTest} />
+                        <Route exact path="/test-result" component={TestResult} />
+                    </Switch>
+                    <Snackbar
+                        open={openSnackbar}
+                        autoHideDuration={1000}
+                        onClose={handleSnackbarClose}
+                    >
+                        <Alert onClose={handleSnackbarClose} severity="info">
+                        Add {20 - wordBank.length} more {wordBank.length < 19 ? 'words' : 'word'}! Make sure you have at least 20 words in the wordbook!
+                        </Alert>
+                    </Snackbar>
+                </Paper>
+            </ThemeProvider>
+        </Fragment>
     );
 };
 
