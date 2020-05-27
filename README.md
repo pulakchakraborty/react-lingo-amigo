@@ -1,6 +1,8 @@
 ## LingoAmigo
 
-Just another web app to add words in a wordbook and taking a quiz to test the newly learnt words. Live demo is available [here](https://lingo-amigo.now.sh/dashboard)
+A react web app to add words in a wordbook. You can take a quiz to test your vocabulary skill. Live demo is available [here](https://lingo-amigo.now.sh/dashboard)
+
+Update (27/05/20) - Dark mode is added to the web-app
 
 ### Dashboard Page
 
