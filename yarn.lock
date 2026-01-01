@@ -8777,12 +8777,13 @@ react-error-overlay@^6.0.7:
   resolved "https://registry.yarnpkg.com/react-error-overlay/-/react-error-overlay-6.0.7.tgz#1dcfb459ab671d53f660a991513cb2f0a0553108"
   integrity sha512-TAv1KJFh3RhqxNvhzxj6LeT5NWklP6rDr2a0jaTfsZ5wSZWHOGeqQyejUp3xxLfPt2UpyJEcVQB/zyPcmonNFA==
 
-react-form-validator-core@0.6.4:
-  version "0.6.4"
-  resolved "https://registry.yarnpkg.com/react-form-validator-core/-/react-form-validator-core-0.6.4.tgz#08b43d90ea05a3e6e83314a68814d8d5a78a73ff"
-  integrity sha512-pqMOuOnkYH+pdnh0Iflhn53l+bso8wQPZ21agn7XQj0ePTHC25VCWKs5NQg8xg7kJfLztD/83ffHyOkAAl6rhw==
+react-form-validator-core@2.0.2:
+  version "2.0.2"
+  resolved "https://registry.yarnpkg.com/react-form-validator-core/-/react-form-validator-core-2.0.2.tgz#734d68175b4e60d11a76983cbaada8756f2cba8c"
+  integrity sha512-8K6X7d1U4lWS37gxCoPkAEnT782Nkr59uCa8eRwKEWU3F1lRUmH56oNhK4frjVqj1t0xHpqMieOT6oylzqkmiA==
   dependencies:
     promise-polyfill "8.1.0"
+    prop-types "^15.0.0"
     react-lifecycles-compat "^3.0.2"
 
 react-is@^16.12.0, react-is@^16.6.0, react-is@^16.7.0, react-is@^16.8.0, react-is@^16.8.1, react-is@^16.8.4:
@@ -8795,13 +8796,13 @@ react-lifecycles-compat@^3.0.2:
   resolved "https://registry.yarnpkg.com/react-lifecycles-compat/-/react-lifecycles-compat-3.0.4.tgz#4f1a273afdfc8f3488a8c516bfda78f872352362"
   integrity sha512-fBASbA6LnOU9dOU2eW7aQ8xmYBSXUIWr+UmF9b1efZBazGNO+rcXT/icdKnYm2pTwcRylVUYwW7H1PHfLekVzA==
 
-react-material-ui-form-validator@^2.0.10:
-  version "2.0.10"
-  resolved "https://registry.yarnpkg.com/react-material-ui-form-validator/-/react-material-ui-form-validator-2.0.10.tgz#3ea4d2759f6c50e140bd346efc4a2e84b8e02683"
-  integrity sha512-Qs32zB5gRUSAiwVAKOXUum4EN+zKycpk0o1FAP/zZsyO29pT2MBN44qaZsxOsPht27/nFZ/7+HcLDQ8YfTAzaQ==
+react-material-ui-form-validator@^5.0.0:
+  version "5.0.0"
+  resolved "https://registry.yarnpkg.com/react-material-ui-form-validator/-/react-material-ui-form-validator-5.0.0.tgz#ca691060fcb5bb8d56ac57f57dfe1b94cbb370a6"
+  integrity sha512-lopyz2JvmMG+JWDPjRpbnnKAIKMyyRK6RMX5eQZEgYfY1jkNK2pqE9xJ8own2bMx250PhvPzmduQHzhJSuYyjw==
   dependencies:
     prop-types "^15.0.0"
-    react-form-validator-core "0.6.4"
+    react-form-validator-core "2.0.2"
 
 react-router-dom@^5.2.0:
   version "5.2.0"
